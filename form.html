@@ -1,14 +1,14 @@
 <div>
-	<form name='newGroup' ng-controller='Form' ng-submit='addGroup()'>
+	<form  ng-controller='Form' ng-submit='addGroup()'>
 		<ul>
 		Your name: <br>
-		<li><input type='text' ng-model='creator'></li>
+		<li><input type='text' ng-model='creator' required></li>
 
 		Time:<br>
-		<li><input type='text' ng-model='time'></li>
+		<li><input type='text' ng-model='time' required></li>
 
 		Location:<br>
-		<li><input type='text' ng-model='location'></li>
+		<li><input type='text' ng-model='location' required></li>
 
 		<button>create group</button>
 		</ul>

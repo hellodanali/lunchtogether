@@ -4,12 +4,18 @@
 			<h3>{{ group.text.creator }}</h3>
 			<h3>Time: {{ group.text.time }}</h3>
 			<h3>Location: {{ group.text.location }}</h3>
+			
+			<h4>Going:</h4>
+			<div ng-repeat='name in group.text.names'>
+				<p>{{ name }}</p>
+			</div>
 
-			<form ng-controller='Form' name='newName' ng-submit='join()'>
+			<div ng-controller='Form' id="{{group.text.key}}">
+			<form  ng-submit='join()'>
 				<input type='text' placeholder='name' ng-model='name'></input>
 				<button>Join</button>
 			</form>
-			
+			</div>
 			<hr>
 		</li>
 

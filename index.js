@@ -14,9 +14,18 @@ app.get('/', function(req, res){
 var groups = [];
 app.post('/groups', function(req, res){
 	var user = req.body;
-	groups.push(user);
-	console.log('post requesting:', user);
+	if(typeof user.text === 'string'){
+		groups.forEach(function(group){
+			if(group.text.key == user.id){
+				group.text.names.push(user.text);
+			}
+		})
+	}else{
+		groups.push(user);		
+	}
+
 	res.send(user);
+
 });
 
 app.get('/groups', function(req, res){

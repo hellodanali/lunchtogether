@@ -1,12 +1,12 @@
 var app = angular.module('app', ['ngRoute'])
-var counter = 0;
+
 app.controller('MakeGroup', function($scope, $location){
 	$scope.change = function(){
 		$location.path('/create');
 	}
 });
 
-app.controller('Form', function($scope, $location, $http){
+app.controller('Form', function($scope, $location, $http, $attrs, $window){
 	$scope.newGroup = {};
 	
 	
@@ -15,10 +15,11 @@ app.controller('Form', function($scope, $location, $http){
 		$scope.newGroup.creator = this.creator;
 		$scope.newGroup.time = this.time;
 		$scope.newGroup.location = this.location;
-		counter++;
-		$scope.newGroup.key = counter;
+
+		var time = new Date();
+		$scope.newGroup.key = time.getTime();
 		$scope.newGroup.names = [];
-		
+
 		$http.post('/groups', {text:$scope.newGroup}).success(function(data){
 			console.log('data',data);
 		})
@@ -26,11 +27,12 @@ app.controller('Form', function($scope, $location, $http){
 	}
 
 	$scope.join = function(){
-		$scope.newGroup.names.push(this.name);
-		console.log('update:', $scope.newGroup.names);
-		// $http.post('/groups', {text:$scope.newGroup}).success(function(data){
-		// 	console.log('new person joined.', $scope.newGroup);
-		// })
+		console.log('update:', $scope.name, $attrs.id);
+		$http.post('/groups', {text:$scope.name, id: $attrs.id}).success(function(data){
+			console.log('new person joined.',data);
+		});
+		// $location.path('/groups');
+		 $window.location.reload();
 	}
 });
 
@@ -39,7 +41,7 @@ app.controller('Groups', function($scope, $http){
 	$scope.names = [];
 	$http.get('/groups').then(function(data){
 		console.log('* get request data * ',data);
-		$scope.groups = data.data;
+		$scope.groups = data.data;;
 	})
 
 
