@@ -1,0 +1,17 @@
+
+body{
+	font-family: Helvetica;
+	
+}
+
+ul{
+	list-style-type: none;
+}
+
+a{
+	text-decoration: none;
+}
+
+a:visited{
+	color: black;
+}

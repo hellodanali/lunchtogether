@@ -1,0 +1,22 @@
+{
+  "name": "lunchtogether",
+  "version": "1.0.0",
+  "description": "'make getting lunch together easier'",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hellodanali/lunchtogether.git"
+  },
+  "author": "'dana'",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/hellodanali/lunchtogether/issues"
+  },
+  "homepage": "https://github.com/hellodanali/lunchtogether#readme",
+  "dependencies": {
+    "body-parser": "^1.15.2"
+  }
+}
