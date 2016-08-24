@@ -11,14 +11,17 @@ app.controller('Form', function($scope, $location, $http, $attrs, $window){
 	
 	
 	$scope.addGroup = function(){
-		console.log(this.creator,this.time, this.location);
+		// console.log('adding:',this.creator,this.time, 'current time:', new Date(), this.location);
+		var time = new Date();
+	
+		$scope.newGroup.hour = this.time.getHours();
+		$scope.newGroup.minute = this.time.getMinutes();
 		$scope.newGroup.creator = this.creator;
 		$scope.newGroup.time = this.time;
-		$scope.newGroup.location = this.location;
-
-		var time = new Date();
+		$scope.newGroup.location = this.location;	
 		$scope.newGroup.key = time.getTime();
 		$scope.newGroup.names = [];
+		$scope.newGroup.expired = false;
 
 		$http.post('/groups', {text:$scope.newGroup}).success(function(data){
 			console.log('data',data);
@@ -28,9 +31,11 @@ app.controller('Form', function($scope, $location, $http, $attrs, $window){
 
 	$scope.join = function(){
 		console.log('update:', $scope.name, $attrs.id);
-		$http.post('/groups', {text:$scope.name, id: $attrs.id}).success(function(data){
-			console.log('new person joined.',data);
-		});
+		if(this.name){		
+			$http.post('/groups', {text:$scope.name, id: $attrs.id}).success(function(data){
+				console.log('new person joined.',data);
+			});
+		}
 		// $location.path('/groups');
 		 $window.location.reload();
 	}

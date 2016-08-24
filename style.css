@@ -1,7 +1,6 @@
 
-body{
+*{
 	font-family: Helvetica;
-	
 }
 
 ul{
@@ -12,6 +11,19 @@ a{
 	text-decoration: none;
 }
 
+a:hover{
+	text-decoration: none;
+}
+
 a:visited{
 	color: black;
+}
+
+.navbar{
+	background-color: #74C2A7;;
+}
+
+h1{
+	color: white;
+	margin-bottom: 30px; 
 }

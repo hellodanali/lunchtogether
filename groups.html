@@ -1,24 +1,24 @@
-<div ng-controller='Groups'>
+<div ng-controller='Groups' class='container-fluid'>
 	<ul>
 		<li ng-repeat="group in groups">
-			<h3>{{ group.text.creator }}</h3>
-			<h3>Time: {{ group.text.time }}</h3>
-			<h3>Location: {{ group.text.location }}</h3>
+			<h2 >{{ group.text.creator }}</h2>
+			<h4>Time: {{ group.text.time | date:'H:mma'}}</h4>
+			<h4>Location: {{ group.text.location }}</h4>
 			
-			<h4>Going:</h4>
+			<h4 ng-show='group.text.expired === false'>Going:</h4>
 			<div ng-repeat='name in group.text.names'>
 				<p>{{ name }}</p>
 			</div>
 
-			<div ng-controller='Form' id="{{group.text.key}}">
-			<form  ng-submit='join()'>
-				<input type='text' placeholder='name' ng-model='name'></input>
-				<button>Join</button>
+			<div ng-show='group.text.expired===true'>you missed it :( </div>
+
+			<div ng-controller='Form' id="{{group.text.key}}" ng-show='group.text.expired === false'>
+			<form  class="form-inline" ng-submit='join()'>
+				<input class="form-control" type='text' placeholder='name' ng-model='name'></input>
+				<button class='btn btn-primary'>Join</button>
 			</form>
 			</div>
 			<hr>
 		</li>
-
 	</ul>
-
 </div>

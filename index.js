@@ -21,16 +21,47 @@ app.post('/groups', function(req, res){
 			}
 		})
 	}else{
-		groups.push(user);		
+		groups.push(user);
+		check(groups);	
 	}
-
+	
 	res.send(user);
-
 });
 
 app.get('/groups', function(req, res){
-	console.log('get requesting',groups);
+	console.log('get requesting, groups[]:',groups);
 	res.send(groups);
 })
+
+
+
+//Helper Function:
+function check(array){
+	console.log('checking time....');
+	var currentTime = new Date();
+	var currentHour = currentTime.getHours();
+	var currentMinute = currentTime.getMinutes();
+	var total = currentHour+'.'+currentMinute;
+
+	total = parseFloat(total);
+	array.forEach(function(group){
+		var postTime = group.text.hour + '.' + group.text.minute;
+		postTime = parseInt(postTime);
+
+		if(total-postTime >= 0){
+			console.log('expiring...');
+			group.text.expired = true;
+		}
+	})
+}
+
+setInterval(function(){
+	check(groups);
+	console.log(groups);
+}, 300000);
+
+
+
+
 
 app.listen(3000)
